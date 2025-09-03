@@ -6,7 +6,8 @@ import {
   LAMPORTS_PER_SOL,
   TransactionInstruction,
   ConfirmedTransaction,
-  ParsedTransactionWithMeta
+  ParsedTransactionWithMeta,
+  PartiallyDecodedInstruction
 } from '@solana/web3.js';
 
 /**
@@ -109,10 +110,11 @@ export const extractMemoFromTransaction = (
     return instruction.programId.toString() === 'MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr';
   });
 
-  if (memoInstruction && memoInstruction.data) {
-    // Decode base58 data
+  if (memoInstruction && 'data' in memoInstruction && memoInstruction.data) {
+    // For PartiallyDecodedInstruction, data is a string
     try {
-      return Buffer.from(memoInstruction.data, 'base58').toString('utf8');
+      // Try to decode as UTF-8 directly first
+      return memoInstruction.data;
     } catch (error) {
       console.error('Error decoding memo data:', error);
       return null;
@@ -148,4 +150,3 @@ export const verifyTransaction = async (
     return false;
   }
 };
-

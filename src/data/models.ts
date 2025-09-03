@@ -301,7 +301,6 @@ export const MarketModel = {
     ResolutionModel.create({
       marketId,
       outcome,
-      resolvedAt: new Date().toISOString(),
       resolutionSource,
     });
 
@@ -404,4 +403,3 @@ export const initializeDatabase = () => {
     });
   }
 };
-

@@ -55,7 +55,7 @@ export const GA_MEASUREMENT_ID = import.meta.env.VITE_GA_MEASUREMENT_ID || '';
  * @returns URL to view the transaction on Solana Explorer
  */
 export const getSolanaExplorerUrl = (signature: string): string => {
-  const cluster = SOLANA_NETWORK === WalletAdapterNetwork.MainnetBeta 
+  const cluster = SOLANA_NETWORK === WalletAdapterNetwork.Mainnet 
     ? 'mainnet-beta' 
     : SOLANA_NETWORK;
   
@@ -68,10 +68,9 @@ export const getSolanaExplorerUrl = (signature: string): string => {
  * @returns URL to view the wallet on Solana Explorer
  */
 export const getSolanaExplorerAddressUrl = (address: string): string => {
-  const cluster = SOLANA_NETWORK === WalletAdapterNetwork.MainnetBeta 
+  const cluster = SOLANA_NETWORK === WalletAdapterNetwork.Mainnet 
     ? 'mainnet-beta' 
     : SOLANA_NETWORK;
   
   return `https://explorer.solana.com/address/${address}?cluster=${cluster}`;
 };
-

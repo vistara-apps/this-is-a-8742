@@ -31,12 +31,15 @@ export class BetResolutionService {
     }
 
     // Create resolution proof
-    const resolutionProof: Omit<ResolutionProof, 'resolvedAt'> = {
+    const resolutionProofData: Omit<ResolutionProof, 'resolvedAt'> = {
       marketId,
       outcome,
       resolutionSource,
       verificationUrl
     };
+
+    // Store the resolution proof
+    ResolutionModel.create(resolutionProofData);
 
     // Resolve the market (this will also resolve all bets)
     return MarketModel.resolve(marketId, outcome, resolutionSource);
@@ -151,4 +154,3 @@ export class BetResolutionService {
     };
   }
 }
-
